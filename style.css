@@ -1,8 +1,29 @@
 h1 {
     color: blue;
-    text-align: center
+    text-align: center;
+    padding: 20px;
+    margin: 30px;
+    background-color: lightyellow;
 }
 
 body {
     background-color: #f0f0f0
+}
+
+nav a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+nav a:hover {
+    background-color: lightblue;
+}
+
+.featured{
+    color: white;
+    background-color: navy;
+    font-weight: bold;
+    padding: 5px;
 }
