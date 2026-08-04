@@ -23,13 +23,6 @@ nav a:hover {
     background-color: lightblue;
 }
 
-.featured {
-    color: white;
-    background-color: navy;
-    font-weight: bold;
-    padding: 5px;
-}
-
 nav {
     display: flex;
     justify-content: space-around;
