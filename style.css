@@ -1,9 +1,11 @@
-h1 {
+.site-name {
     color: blue;
     text-align: center;
     padding: 20px;
     margin: 30px;
     background-color: lightyellow;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 body {
@@ -21,9 +23,14 @@ nav a:hover {
     background-color: lightblue;
 }
 
-.featured{
+.featured {
     color: white;
     background-color: navy;
     font-weight: bold;
     padding: 5px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
 }
