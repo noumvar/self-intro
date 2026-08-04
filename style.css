@@ -34,3 +34,8 @@ nav {
     display: flex;
     justify-content: space-around;
 }
+
+.current {
+    font-weight: bold;
+    text-decoration: underline;
+}
