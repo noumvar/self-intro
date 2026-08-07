@@ -20,3 +20,20 @@ if (answer === "5") {
 } else {
     console.log("不正解です");
 }
+
+function great(name) {
+    console.log("こんにちは、" + name);
+}
+
+great("リー");
+
+function add(a, b) {
+    return a  + b;
+}
+
+let result = add(3, 5);
+console.log(result);
+
+let subjects = ["プログラミング","イラスト","哲学"];
+console.log(subjects[0]);
+console.log(subjects.length);
