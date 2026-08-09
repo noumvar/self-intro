@@ -42,28 +42,97 @@ for (let i = 0; i < subjects.length; i++) {
     console.log(subjects[i]);
 }
 
+
+//問題のデータ
 const quizzes = [
-    { question: "HTMLの正式名称は？", answer: "HyperText Markup Language" },
-    { question: "CSSの正式名称は？", answer: "Cascading Style Sheets" },
-    { question: "JavaScriptの正式名称は？", answer: "JavaScript" }
+    { 
+        type: "exact",
+        question: "HTMLの正式名称は？", 
+        answer: "HyperText Markup Language" 
+    },
+    { 
+        type: "exact",
+        question: "CSSの正式名称は？", 
+        answer: "Cascading Style Sheets" 
+    },
+    { 
+        type: "exact",
+        question: "JavaScriptの正式名称は？", 
+        answer: "JavaScript" 
+    },
+    {
+        type: "keyword",
+        question: "不変量とはどのような性質のことか",
+        keywords: ["変わらない", "変換"]
+    },
+    {
+        type: "choice",
+        question: "因数分解の結果として正しいものは？",
+        choices: ["a(b+c)の形", "a+b+cの形", "a÷bの形"],
+        answer: "a(b+c)の形"
+    }
 ];
 
-let currentIndex = 0;
+
+
+//変数
+let currentIndex = 4;
 let correctCount = 0;
 
+//choice処理
+let choices = quizzes[currentIndex].choices;
+
+if (choices) {
+    for (let i = 0; i < choices.length; i++) {
+        let button = document.createElement("button");
+
+        button.innerText = choices[i];
+
+        button.addEventListener("click", function() {
+            let quiz = quizzes[currentIndex];
+
+            if (button.innerText === quiz.answer) {
+                document.getElementById("result").innerText = "正解です";
+                correctCount = correctCount + 1;
+            } else {
+                document.getElementById("result").innerText = " 不正解です";
+            }
+        });
+
+        document.getElementById("choicesArea").appendChild(button);
+    }
+}
+
+//正誤判定
 document.getElementById("question").innerText = quizzes[currentIndex].question;
+
 document.getElementById("submitBtn").addEventListener("click", function() {
     let userAnswer = document.getElementById("answerInput").value;
-    let correctAnswer = quizzes[currentIndex].answer;
+    let quiz = quizzes[currentIndex];
+    let isCorrect = false;
 
-    if (userAnswer === correctAnswer) {
+    //type判定
+    if (quiz.type === "exact") {
+        isCorrect = (userAnswer === quiz.answer);
+    } else if (quiz.type === "keyword") {
+        for (let i = 0; i < quiz.keywords.length; i++) {
+            if (userAnswer.includes(quiz.keywords[i])) {
+                isCorrect = true;
+            }
+        }
+    }
+
+    if (isCorrect) {
         document.getElementById("result").innerText = "正解です";
         correctCount = correctCount + 1;
     } else {
         document.getElementById("result").innerText = " 不正解です";
     }
+
+    document.getElementById("submitBtn").disabled = true;
 });
 
+//次の問題へ
 document.getElementById("nextBtn").addEventListener("click", function() {
     currentIndex = currentIndex + 1;
 
@@ -71,6 +140,7 @@ document.getElementById("nextBtn").addEventListener("click", function() {
         document.getElementById("question").innerText = quizzes[currentIndex].question;
         document.getElementById("answerInput").value = "";
         document.getElementById("result").innerText = "";
+        document.getElementById("submitBtn").disabled = false;
     } else {
         document.getElementById("question").innerText = quizzes.length + "問中" + correctCount + "問正解でした！";
         document.getElementById("answerInput").style.display = "none";
@@ -80,6 +150,7 @@ document.getElementById("nextBtn").addEventListener("click", function() {
     }
 });
 
+//もう一度
 document.getElementById("restartBtn").addEventListener("click", function() {
 
     currentIndex = 0;
@@ -93,6 +164,7 @@ document.getElementById("restartBtn").addEventListener("click", function() {
     document.getElementById("submitBtn").style.display = "inline";
     document.getElementById("nextBtn").style.display = "inline";
     document.getElementById("restartBtn").style.display = "none";
+    document.getElementById("submitBtn").disabled = false;
 
 });
 
