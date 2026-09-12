@@ -1,15 +1,25 @@
-.site-name {
-    color: blue;
-    text-align: center;
-    padding: 20px;
-    margin: 30px;
-    background-color: lightyellow;
-    font-size: 2em;
-    font-weight: bold;
-}
-
 body {
     background-color: #f0f0f0
+}
+
+.site-name {
+    color: #5050e0;
+    text-align: center;
+    padding: 20px;
+    margin: 30px 30px 10px 30px;
+    background-color: #f0d060;
+    border-radius: 20px;
+    font-family: serif;
+    font-size: 300%;
+    font-weight: 900;
+}
+
+#tagline {
+    text-align: center;
+    color: #666;
+    font-size: 1.1em;
+    margin-top: 0px;
+    margin-bottom: 30px;
 }
 
 nav a {
