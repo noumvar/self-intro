@@ -1,7 +1,5 @@
 console.log("こんにちは");
 
-//document.getElementById("tagline").innerText = "JavaScriptから書き換えました!";
-
 const siteName = "noumvar";
 console.log(siteName);
 
