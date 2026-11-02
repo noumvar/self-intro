@@ -33,36 +33,58 @@ const quizzes = [
 
 
 //変数
-let currentIndex = 4;
+let currentIndex = 0;
 let correctCount = 0;
 
-//choice処理
-let choices = quizzes[currentIndex].choices;
+//問題を表示する
+function showQuestion() {
+    let quiz = quizzes[currentIndex];
+    let choicesArea = document.getElementById("choicesArea");
 
-if (choices) {
-    for (let i = 0; i < choices.length; i++) {
-        let button = document.createElement("button");
+    document.getElementById("question").innerText = quiz.question;
+    document.getElementById("answerInput").value = "";
+    document.getElementById("result").innerText = "";
+    document.getElementById("submitBtn").disabled = false;
 
-        button.innerText = choices[i];
+    //前の問題の選択肢を消す
+    choicesArea.innerHTML = "";
 
-        button.addEventListener("click", function() {
-            let quiz = quizzes[currentIndex];
+    if (quiz.type === "choice") {
+        //選択式：入力欄を隠して、選択肢のボタンを作る
+        document.getElementById("answerInput").style.display = "none";
+        document.getElementById("submitBtn").style.display = "none";
 
-            if (button.innerText === quiz.answer) {
-                document.getElementById("result").innerText = "正解です";
-                correctCount = correctCount + 1;
-            } else {
-                document.getElementById("result").innerText = " 不正解です";
-            }
-        });
+        for (let i = 0; i < quiz.choices.length; i++) {
+            let button = document.createElement("button");
+            button.innerText = quiz.choices[i];
 
-        document.getElementById("choicesArea").appendChild(button);
+            button.addEventListener("click", function() {
+                if (button.innerText === quiz.answer) {
+                    document.getElementById("result").innerText = "正解です";
+                    correctCount = correctCount + 1;
+                } else {
+                    document.getElementById("result").innerText = "不正解です";
+                }
+
+                //選択肢のボタンを全部押せなくする
+                let buttons = choicesArea.children;
+                for (let j = 0; j < buttons.length; j++) {
+                    buttons[j].disabled = true;
+                }
+            });
+
+            choicesArea.appendChild(button);
+        }
+    } else {
+        //入力式：入力欄を表示する
+        document.getElementById("answerInput").style.display = "inline";
+        document.getElementById("submitBtn").style.display = "inline";
     }
 }
 
-//正誤判定
-document.getElementById("question").innerText = quizzes[currentIndex].question;
+showQuestion();
 
+//正誤判定
 document.getElementById("submitBtn").addEventListener("click", function() {
     let userAnswer = document.getElementById("answerInput").value;
     let quiz = quizzes[currentIndex];
@@ -83,7 +105,7 @@ document.getElementById("submitBtn").addEventListener("click", function() {
         document.getElementById("result").innerText = "正解です";
         correctCount = correctCount + 1;
     } else {
-        document.getElementById("result").innerText = " 不正解です";
+        document.getElementById("result").innerText = "不正解です";
     }
 
     document.getElementById("submitBtn").disabled = true;
@@ -94,12 +116,10 @@ document.getElementById("nextBtn").addEventListener("click", function() {
     currentIndex = currentIndex + 1;
 
     if (currentIndex < quizzes.length) {
-        document.getElementById("question").innerText = quizzes[currentIndex].question;
-        document.getElementById("answerInput").value = "";
-        document.getElementById("result").innerText = "";
-        document.getElementById("submitBtn").disabled = false;
+        showQuestion();
     } else {
         document.getElementById("question").innerText = quizzes.length + "問中" + correctCount + "問正解でした！";
+        document.getElementById("choicesArea").innerHTML = "";
         document.getElementById("answerInput").style.display = "none";
         document.getElementById("submitBtn").style.display = "none";
         document.getElementById("nextBtn").style.display = "none";
@@ -113,17 +133,9 @@ document.getElementById("restartBtn").addEventListener("click", function() {
     currentIndex = 0;
     correctCount = 0;
 
-    document.getElementById("question").innerText = quizzes[currentIndex].question;
-    document.getElementById("answerInput").value = "";
-    document.getElementById("result").innerText = "";
-
-    document.getElementById("answerInput").style.display = "inline";
-    document.getElementById("submitBtn").style.display = "inline";
     document.getElementById("nextBtn").style.display = "inline";
     document.getElementById("restartBtn").style.display = "none";
-    document.getElementById("submitBtn").disabled = false;
+
+    showQuestion();
 
 });
-
-console.log(quizzes[0].question);
-console.log(quizzes[1].answer);
