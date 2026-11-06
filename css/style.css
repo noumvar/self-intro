@@ -75,24 +75,3 @@ nav {
     font-weight: bold;
     text-decoration: underline;
 }
-
-/* 学習タイマーの段階ごとの色 */
-.textbookWork {
-    color: #1d4ed8;
-}
-
-.textbookBreak {
-    color: #93c5fd;
-}
-
-.switchBreak {
-    color: #6b7280;
-}
-
-.makeWork {
-    color: #15803d;
-}
-
-.makeBreak {
-    color: #86efac;
-}

@@ -1,0 +1,11 @@
+/* 段階ごとの色 */
+.textbookWork   { color: #1d4ed8; }
+.textbookBreak  { color: #93c5fd; }
+
+.makeWebWork    { color: #c2410c; }
+.makeWebBreak   { color: #fdba74; }
+
+.makeJsWork     { color: #15803d; }
+.makeJsBreak    { color: #86efac; }
+
+.switchBreak    { color: #6b7280; }
